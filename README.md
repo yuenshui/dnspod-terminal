@@ -1,0 +1,1 @@
+init dnspod-terminal
