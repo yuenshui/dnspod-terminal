@@ -9,13 +9,29 @@ DT.loadConfig = function () {
       console.log('load configs:', data); //  2pm
     }, "json");
 
+  // 添加token
+  // $.ajax({
+  //   type: "POST",
+  //   contentType: "application/json",
+  //   // processData: false,
+  //   dataType: "json",
+  //   url: "/configs",
+  //   data: JSON.stringify({ "id": "120333", "token": "18f709bc28ea9efeb6d971458f8ba3f6" }),
+  //   success: function (message) {
+  //     console.log("提交成功", JSON.stringify(message));
+  //   },
+  //   error: function (message) {
+  //     console.error("提交失败", JSON.stringify(message));
+  //   }
+  // });
+
+  // 获取域名列表
   $.ajax({
-    type: "POST",
+    type: "GET",
     contentType: "application/json",
-    // processData: false,
     dataType: "json",
-    url: "/configs",
-    data: JSON.stringify({ "id": "1", "Token": "1" }),
+    url: "/domains",
+    data: { "id": "120333" },
     success: function (message) {
       console.log("提交成功", JSON.stringify(message));
     },
