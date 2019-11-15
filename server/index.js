@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 const debug = require("debug")("dnspod-terminal:entry");
 const app = new (require("koa"))();
-const path = require('path');
-const router = require('./router');
-const staticService = require('koa-static');
+const path = require("path");
+const router = require("./router");
+const staticService = require("koa-static");
 const koaBody = require("koa-body");
 const bodyConfig = {
   multipart: true,
@@ -21,7 +21,7 @@ let port = 1228;
 if (process.env.port) port = parseInt(process.env.port);
 app
   .use(koaBody(bodyConfig))
-  .use(staticService(path.dirname(__dirname) + '/static'))
+  .use(staticService(path.dirname(__dirname) + "/pages/build"))
   .use(router.routes())
   .use(router.allowedMethods());
 

@@ -165,4 +165,78 @@ DT.loadConfig = function () {
       console.error("提交失败", JSON.stringify(message));
     }
   });
+
+  // 移除 config
+  $.ajax({
+    type: "POST",
+    contentType: "application/json",
+    dataType: "json",
+    url: "/config/remove",
+    data: JSON.stringify({
+      id: 120333
+    }),
+    success: function (message) {
+      console.log("提交成功", JSON.stringify(message));
+    },
+    error: function (message) {
+      console.error("提交失败", JSON.stringify(message));
+    }
+  });
+
+  // 移除域名
+  $.ajax({
+    type: "POST",
+    contentType: "application/json",
+    dataType: "json",
+    url: "/config/remove",
+    data: JSON.stringify({
+      id: 120333,
+      domain_id: 2655709
+    }),
+    success: function (message) {
+      console.log("提交成功", JSON.stringify(message));
+    },
+    error: function (message) {
+      console.error("提交失败", JSON.stringify(message));
+    }
+  });
+
+  // 移除记录
+  $.ajax({
+    type: "POST",
+    contentType: "application/json",
+    dataType: "json",
+    url: "/config/remove",
+    data: JSON.stringify({
+      id: 120333,
+      domain_id: 2655709,
+      record_id: 33
+    }),
+    success: function (message) {
+      console.log("提交成功", JSON.stringify(message));
+    },
+    error: function (message) {
+      console.error("提交失败", JSON.stringify(message));
+    }
+  });
+
+  // 更新记录
+  $.ajax({
+    type: "POST",
+    contentType: "application/json",
+    dataType: "json",
+    url: "/record/ip",
+    data: JSON.stringify({
+      id: 120333,
+      domain_id: 2655709,
+      record_id: 33,
+      value: '1.2.3.4'
+    }),
+    success: function (message) {
+      console.log("提交成功", JSON.stringify(message));
+    },
+    error: function (message) {
+      console.error("提交失败", JSON.stringify(message));
+    }
+  });
 };
