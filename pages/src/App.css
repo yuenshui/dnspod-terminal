@@ -1,0 +1,51 @@
+@import '~antd/dist/antd.css';
+.ant-layout-header{
+  background: #fff;
+  text-align: left;
+}
+.ant-layout{
+  height: 100%;
+}
+.ant-layout-content{
+  padding: 40px;
+}
+.ant-table-wrapper{
+  padding: 20px;
+}
+.row{
+  background: #fff;
+  border-radius: 10px;
+  height: 100%;
+}
+.col{
+  border: 1px solod #666 !important;
+  padding: 20px;
+  text-align: left;
+}
+.App {
+  text-align: center;
+  height: 100%;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+.ant-pagination {
+  /* display: none; */
+}
+/* ant-table-pagination */
