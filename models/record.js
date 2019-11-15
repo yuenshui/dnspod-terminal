@@ -202,3 +202,32 @@ module.exports.recordModifyIP = async ctx => {
     message: Rs.status.message || ""
   });
 };
+
+module.exports.recordRemove = async ctx => {
+  if (
+    !ctx.request.body ||
+    !ctx.request.body.id ||
+    !ctx.request.body.domain_id ||
+    !ctx.request.body.record_id
+  ) {
+    return (ctx.body = { code: 403, message: "" });
+  }
+  let id = parseInt(ctx.request.body.id);
+  let domainId = parseInt(ctx.request.body.domain_id);
+  let recordId = parseInt(ctx.request.body.record_id);
+  let client = dnspod.get(id);
+  if (!client) {
+    let config = configs.get(id);
+    if (!config) return (ctx.body = { code: 404, message: "" });
+    client = await dnspod.init(config.id, config.token);
+  }
+  if (!client && !client.info) {
+    return (ctx.body = { code: 404, message: "" });
+  }
+
+  let Rs = await client.RecordRemove(domainId, recordId);
+  return (ctx.body = {
+    code: Rs.status.code || 1,
+    message: Rs.status.message || ""
+  });
+};

@@ -7,6 +7,7 @@ const record = require("../models/record");
 
 router.get("/configs", config.loadConfig);
 router.post("/configs", config.addConfig);
+router.post("/config/remove", config.remove);
 
 router.get("/domains", domain.domains);
 router.get("/domain/purview", domain.domainPurview);
@@ -18,5 +19,7 @@ router.get("/records", record.records);
 router.get("/record/types", record.recordType);
 router.get("/record/line", record.recordLine);
 router.post("/record", record.recordCreate);
+router.post("/record/remove", record.recordRemove);
+router.post("/record/ip", record.recordModifyIP);
 
 module.exports = router;
