@@ -1,9 +1,9 @@
 "use strict";
 const debug = require("debug")("dnspod-terminal:router");
 const router = require("koa-router")();
-const config = require("../lib/config");
-const domain = require("../lib/domain");
-const record = require("../lib/record");
+const config = require("../models/config");
+const domain = require("../models/domain");
+const record = require("../models/record");
 
 router.get("/configs", config.loadConfig);
 router.post("/configs", config.addConfig);
