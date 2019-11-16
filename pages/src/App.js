@@ -72,7 +72,7 @@ class App extends Component {
     })
       .then(function (response) {
         that.setState({
-          dataIds: Object.values(response.data),
+          dataIds: Object.values(response.data.data),
         });
       })
       .catch(function (error) {
@@ -94,15 +94,6 @@ class App extends Component {
   }
   // 添加浮窗  下拉选择 构建
   RecordFromRendering = () => {
-    // typesData:data1,
-    // lineData:data2,
-    // typesData:[],
-    // typesDataHtml:[],
-    // Record_Type:"",
-
-    // lineData:[],
-    // lineDataHtml:[],
-    // Record_Line: '',
 
     let typesData = this.state.typesData.data,
       lineData = this.state.lineData.data,
@@ -216,16 +207,13 @@ class App extends Component {
 
 
   }
-  handleChange = async (value) => {
+  handleChange = (value) => {
 
     this.setState({
       currentID: value
     }, () => {
       this.DomainNameTable()
     });
-
-
-
   }
 
   showModal = () => {
@@ -277,32 +265,8 @@ class App extends Component {
 
     });
   };
+  // 添加 记录
   RecordOnOk = () => {
-   
-    /* 
-     id: 120333,
-     domain_id: 2655709,
-     value: '124.200.27.49',
-     sub_domain: 'testtt',
-     record_type: 'A',
-     record_line: '默认',
-     record_line_id: '0',
-     mx: '0',
-     ttl: '120',
-     status: 'enable' */
-    /* RecordValue:"",
-       RecordSub_domain:"",
-       typesData:[],
-       typesDataHtml:[],
-       Record_Type:"",
-
-       lineData:[],
-       lineDataHtml:[],
-       Record_Line: '',
-       Record_Line_Id: '',
-       RecordMx:"",
-       RecordTtl:'',
-       RecordStatus:"" */
     let that = this;
     if (!that.state.RecordValue) {
       message.error('value 字段不得为空');
@@ -314,11 +278,11 @@ class App extends Component {
     else if (!that.state.Record_Type) {
       message.error('record_type 字段不得为空');
       return;
-    } 
+    }
     else if (!that.state.Record_Line) {
       message.error('record_line 字段不得为空');
       return;
-    } 
+    }
     else if (!that.state.RecordMx) {
       message.error('mx 字段不得为空');
       return;
@@ -335,8 +299,9 @@ class App extends Component {
       this.setState({
         RecordLoadingD: true
       })
-      axios.post(that.state.host + "record", 
-        {id: that.state.currentID,
+      axios.post(that.state.host + "record",
+        {
+          id: that.state.currentID,
           domain_id: that.state.cowadayID,
           value: that.state.RecordValue,
           sub_domain: that.state.RecordSub_domain,
@@ -352,58 +317,58 @@ class App extends Component {
           console.log(e.data);
           let data = e.data;
           let code = data.code;
-  // -15 域名已被封禁
-  // -7 企业账号的域名需要升级才能设置
-  // -8 代理名下用户的域名需要升级才能设置
-  // 6 缺少参数或者参数错误
-  // 7 不是域名所有者或者没有权限
-  // 21 域名被锁定
-  // 22 子域名不合法
-  // 23 子域名级数超出限制
-  // 24 泛解析子域名错误
-  // 500025 A记录负载均衡超出限制
-  // 500026 CNAME记录负载均衡超出限制
-  // 26 记录线路错误
-  // 27 记录类型错误
-  // 30 MX 值错误，1-20
-  // 31 存在冲突的记录(A记录、CNAME记录、URL记录不能共存)
-  // 32 记录的TTL值超出了限制
-  // 33 AAAA 记录数超出限制
-  // 34 记录值非法
-  // 36 @主机的NS纪录只能添加默认线路
-  // 82 不能添加黑名单中的IP
-  if(code == -15){
-    message.error('域名已被封禁');
-  }else if(code == -7){
-    message.error('企业账号的域名需要升级才能设置');
-  }else if(code == -8){
-    message.error('代理名下用户的域名需要升级才能设置');
-  }else if(code == 6){
-    message.error('代理名下用户的域名需要升级才能设置');
-  }else if(code == 7){
-    message.error('不是域名所有者或者没有权限');
-  }else if(code == 21){
-    message.error('域名被锁定');
-  }else if(code == 21){
-    message.error('域名被锁定');
-  }else if(code == 22){
-    message.error('域名被锁定');
-  }
-          
-          if (data.code == 1) {
-            //成功
+          if (code == -15) {
+            message.error('域名已被封禁');
+          } else if (code == -7) {
+            message.error('企业账号的域名需要升级才能设置');
+          } else if (code == -8) {
+            message.error('代理名下用户的域名需要升级才能设置');
+          } else if (code == 6) {
+            message.error('代理名下用户的域名需要升级才能设置');
+          } else if (code == 7) {
+            message.error('不是域名所有者或者没有权限');
+          } else if (code == 21) {
+            message.error('域名被锁定');
+          } else if (code == 22) {
+            message.error('子域名不合法');
+          } else if (code == 23) {
+            message.error('子域名级数超出限制');
+          } else if (code == 24) {
+            message.error('泛解析子域名错误');
+          } else if (code == 500025) {
+            message.error('A记录负载均衡超出限制');
+          } else if (code == 500026) {
+            message.error('CNAME记录负载均衡超出限制');
+          } else if (code == 26) {
+            message.error('记录线路错误');
+          } else if (code == 27) {
+            message.error('记录类型错误');
+          } else if (code == 30) {
+            message.error('MX 值错误，1-20');
+          } else if (code == 31) {
+            message.error('存在冲突的记录(A记录、CNAME记录、URL记录不能共存)');
+          } else if (code == 32) {
+            message.error('记录的TTL值超出了限制');
+          } else if (code == 33) {
+            message.error('AAAA 记录数超出限制');
+          } else if (code == 34) {
+            message.error('记录值非法');
+          } else if (code == 36) {
+            message.error('@主机的NS纪录只能添加默认线路');
+          } else if (code == 82) {
+            message.error('不能添加黑名单中的IP');
+          }
+          else {
             that.setState({
               visible: false,
               RecordLoadingD: false,
-            });
-            // message.success('添加成功');
-            // data.DomainNameTable()
-          } else {
-            // 异常放回
-
+            })
+            message.success('添加成功');
+            // mian1m
           }
-        })
-        .catch(function (error) {
+
+
+        }).catch(function (error) {
           console.log(error);
 
         })
@@ -415,6 +380,7 @@ class App extends Component {
     }
 
   }
+  // 添加域名
   DomainOnOk = () => {
     this.setState({
       confirmLoadingD: true,
@@ -439,7 +405,7 @@ class App extends Component {
           message.success('添加成功');
           data.DomainNameTable()
         } else {
-          // 异常放回
+          // 异常
 
         }
       })
@@ -468,13 +434,7 @@ class App extends Component {
               let data = e.data;
 
               if (data.code == 1) {
-                //成功
-                // that.setState({
-                //   visible: false,
-                //   confirmLoading: false,
-                // });
-                // message.success('添加成功');
-                // data.DomainNameTable()
+
               } else {
                 // 异常放回 
               }
@@ -600,7 +560,7 @@ class App extends Component {
 
     var html = [];
     for (let i in dataIds) {
-      html.push(<Option value={dataIds[i].id} key={dataIds[i].id}>{dataIds[i].id}</Option>)
+      html.push(<Option value={dataIds[i].id} key={dataIds[i].id }>{dataIds[i].id}</Option>)
     }
     return (
       <div className="App">
