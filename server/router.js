@@ -19,6 +19,7 @@ router.get("/records", record.records);
 router.get("/record/types", record.recordType);
 router.get("/record/line", record.recordLine);
 router.post("/record", record.recordCreate);
+router.post("/record/update", record.recordModify);
 router.post("/record/remove", record.recordRemove);
 router.post("/record/ip", record.recordModifyIP);
 
